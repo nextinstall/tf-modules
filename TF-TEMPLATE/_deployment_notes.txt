@@ -1,0 +1,9 @@
+When using this template you must make some changes depending on the type (or requirement) for a load balancer
+for your application.
+
+You must remove the .ignore suffix from the load balancer you wish to deploy and make sure
+the other load balancer types are ignored with a .ignore suffix.
+
+so:
+apploadbalancer.tf #this deploys the application load balancer with noted configuration
+elasticloadbalancer-classic.tf #this deploys a classic/elasitc load balancer with noted configuration
