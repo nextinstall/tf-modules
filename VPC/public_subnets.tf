@@ -4,7 +4,13 @@
 resource "aws_internet_gateway" "public" {
   vpc_id = "${var.vpc_id}"
 
-  tags = { Name = "${var.Name}-igw" }
+  tags = { 
+    Name = "${var.Name}-inet-gw"
+    Enviornment = "${var.Environment}"
+    Product = "${var.Product}"
+    Platform = "${var.Platform}"
+    Terraform = "${var.Terraform}" 
+  }
 }
 
 resource "aws_subnet" "public" {
@@ -13,7 +19,13 @@ resource "aws_subnet" "public" {
   cidr_block        = "${var.public_subnets[count.index]}"
   availability_zone = "${var.azs[count.index]}"
 
-  tags      = { Name = "${var.Name}-${var.azs[count.index]}-public" }
+  tags      = { 
+    Name = "${var.Name}-${var.azs[count.index]}-public"
+    Enviornment = "${var.Environment}"
+    Product = "${var.Product}"
+    Platform = "${var.Platform}"
+    Terraform = "${var.Terraform}"
+  }
   lifecycle { create_before_destroy = true }
 
   map_public_ip_on_launch = true
@@ -27,7 +39,13 @@ resource "aws_route_table" "public" {
       gateway_id = "${aws_internet_gateway.public.id}"
   }
 
-  tags = { Name = "${var.Name}.pub_route_table.${var.azs[count.index]}" }
+  tags = { 
+    Name = "${var.Name}.pub_route_table.${var.azs[count.index]}"
+    Enviornment = "${var.Environment}"
+    Product = "${var.Product}"
+    Platform = "${var.Platform}"
+    Terraform = "${var.Terraform}"
+  }
  
   lifecycle { create_before_destroy = true }
 }

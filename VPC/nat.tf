@@ -3,8 +3,11 @@ resource "aws_eip" "nat" {
   count             =  "${length(var.public_subnets)}"
   
   tags = {
-        Name = "${var.Name}-nat-${format("%02d", count.index + 1)}"
-        Environment = "${var.Environment}"
+    Name = "${var.Name}-nat-${format("%02d", count.index + 1)}"
+    Environment = "${var.Environment}"
+    Product = "${var.Product}"
+    Platform = "${var.Platform}"
+    Terraform = "${var.Terraform}"
   }
   
   lifecycle { create_before_destroy = true }
@@ -16,8 +19,11 @@ resource "aws_nat_gateway" "nat" {
   subnet_id     = "${aws_subnet.public.*.id[count.index]}"
   
   tags = {
-        Name = "${var.Name}-nat-gw-${format("%02d", count.index + 1)}"
-        Environment = "${var.Environment}"
+    Name = "${var.Name}-nat-gw-${format("%02d", count.index + 1)}"
+    Environment = "${var.Environment}"
+    Product = "${var.Product}"
+    Platform = "${var.Platform}"
+    Terraform = "${var.Terraform}"
     }
   
   lifecycle { create_before_destroy = true }

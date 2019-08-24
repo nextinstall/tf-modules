@@ -8,7 +8,10 @@ resource "aws_vpc" "vpc"{
     enable_dns_hostnames = true
   
     tags = {
-        Name = "${var.Name}"
+        Name = "${var.Environment}-${var.Name}-vpc"
         Environment = "${var.Environment}"
+        Product = "${var.Product}"
+        Platform = "${var.Platform}"
+        Terraform = "${var.Terraform}"
     }
 }
